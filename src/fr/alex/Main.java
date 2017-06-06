@@ -12,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        List<Truth> truths = new ArrayList<Truth>();
+        List<Truth> truths = new ArrayList<>();
         truths.add(new Truth(0L, 0L, 1L, 0L));
         truths.add(new Truth(1L, 1L, 1L, 1L));
         truths.add(new Truth(1L, 0L, 1L, 1L));
@@ -23,10 +23,15 @@ public class Main {
         Neuron neuron = new Neuron(random(r), random(r), random(r));
 
         System.out.println(neuron);
+
+        //Training phase
         for(int i = 0 ; i < ITERATION; i++){
             neuron.train(truths.get(i%4));
         }
+
         System.out.println(neuron);
+
+        //Find the answer for a new case
         System.out.println(neuron.think(new Input(1L,0L,0L)));
 
     }

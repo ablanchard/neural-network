@@ -13,9 +13,11 @@ public class Neuron {
     }
 
     public void train(Truth truth){
-        double sumWeights = sumWeights(truth.input);
-        double output = normalize(sumWeights);
+        double output = think(truth.input);
+        adjustWeights(truth, output);
+    }
 
+    private void adjustWeights(Truth truth, double output) {
         double error = truth.expected - output;
 
         weight1 += getAdjustment(error,truth.input.input1,output);
