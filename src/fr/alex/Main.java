@@ -22,35 +22,35 @@ public class Main {
 
     }
 
-//    private static void exampleWithOneNeuronNetwork() {
-//        List<Truth> truths = new ArrayList<>();
-//        truths.add(new Truth(0L, 0L, 1L, 0L));
-//        truths.add(new Truth(0L, 1L, 1L, 1L));
-//        truths.add(new Truth(1L, 0L, 1L, 1L));
-//        truths.add(new Truth(0L, 1L, 0L, 1L));
-//        truths.add(new Truth(1L, 0L, 0L, 1L));
-//        truths.add(new Truth(1L, 1L, 1L, 0L));
-//        truths.add(new Truth(0L, 0L, 0L, 0L));
-//
-//        Random r = new Random();
-//
-//        NeuronLayer layer1 = new NeuronLayer(random(r), 4, 3);
-//        NeuronLayer layer2 = new NeuronLayer(random(r), 1, 4);
-//
-//        NeuronNetwork network = new NeuronNetwork(layer1, layer2);
-//
-//        System.out.println(network);
-//
-//        //Training phase
-//        for(int i = 0 ; i < ITERATION_2; i++){
-//            network.train(truths.get(i%7));
-//        }
-//
-//        System.out.println(network);
-//
-//        //Find the answer for a new case
-//        System.out.println(network.think(new Input(1L,0L,0L)));
-//    }
+    private static void exampleWithOneNeuronNetwork() {
+        List<Truth> truths = new ArrayList<>();
+        truths.add(new Truth(0.0, asList(0.0, 0.0, 1.0)));
+        truths.add(new Truth(1.0, asList(0.0, 1.0, 1.0)));
+        truths.add(new Truth(1.0, asList(1.0, 0.0, 1.0)));
+        truths.add(new Truth(1.0, asList(0.0, 1.0, 0.0)));
+        truths.add(new Truth(1.0, asList(1.0, 0.0, 0.0)));
+        truths.add(new Truth(0.0, asList(1.0, 1.0, 1.0)));
+        truths.add(new Truth(0.0, asList(0.0, 0.0, 0.0)));
+
+        Random r = new Random();
+
+        NeuronLayer layer1 = new NeuronLayer(r, 4, 3);
+        NeuronLayer layer2 = new NeuronLayer(r, 1, 4);
+
+        NeuronNetwork network = new NeuronNetwork(layer1, layer2);
+
+        System.out.println(network);
+
+        //Training phase
+        for(int i = 0 ; i < ITERATION_2; i++){
+            network.train(truths.get(i%7));
+        }
+
+        System.out.println(network);
+
+        //Find the answer for a new case
+        System.out.println(network.think(asList(1.0,0.0,0.0)));
+    }
 
     private static void exampleWithOneNeuron() {
         List<Truth> truths = new ArrayList<>();

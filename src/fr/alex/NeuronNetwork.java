@@ -1,5 +1,7 @@
 package fr.alex;
 
+import java.util.List;
+
 public class NeuronNetwork {
 
     public NeuronLayer layer1;
@@ -23,7 +25,8 @@ public class NeuronNetwork {
 
     }
 
-    public void think(Input input){
-
+    public double think(List<Double> input){
+        List<Double> layer1Results = layer1.think(input);
+        return layer2.think(layer1Results).get(0);
     }
 }
