@@ -24,7 +24,7 @@ public class Neuron {
 
     private void adjustWeights(Truth truth, double output) {
         double error = truth.expected - output;
-        IntStream.range(0, weights.size() - 1).forEach(i -> weights.set(i, getAdjustment(error, truth.inputs.get(i), output)));
+        IntStream.range(0, weights.size() - 1).forEach(i -> weights.set(i, weights.get(i) + getAdjustment(error, truth.inputs.get(i), output)));
     }
 
     public double think(List<Double> input){

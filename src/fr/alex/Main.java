@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import static java.util.Arrays.asList;
+
 public class Main {
 
     public static final double RANGE_MIN = -1;
@@ -52,10 +54,10 @@ public class Main {
 
     private static void exampleWithOneNeuron() {
         List<Truth> truths = new ArrayList<>();
-        truths.add(new Truth(0.0, Arrays.asList(0.0, 0.0, 1.0)));
-        truths.add(new Truth(1.0, Arrays.asList(1.0, 1.0, 1.0)));
-        truths.add(new Truth(1.0, Arrays.asList(1.0, 0.0, 1.0)));
-        truths.add(new Truth(0.0, Arrays.asList(0.0, 1.0, 1.0)));
+        truths.add(new Truth(0.0, asList(0.0, 0.0, 1.0)));
+        truths.add(new Truth(1.0, asList(1.0, 1.0, 1.0)));
+        truths.add(new Truth(1.0, asList(1.0, 0.0, 1.0)));
+        truths.add(new Truth(0.0, asList(0.0, 1.0, 1.0)));
 
         Random r = new Random();
 
@@ -71,7 +73,7 @@ public class Main {
         System.out.println(neuron);
 
         //Find the answer for a new case
-        System.out.println(neuron.think(Arrays.asList(1.0,0.0,0.0)));
+        System.out.println(neuron.think(asList(1.0,0.0,0.0)));
     }
 
 }
