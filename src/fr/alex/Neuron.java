@@ -3,10 +3,15 @@ package fr.alex;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 
 import static fr.alex.Main.RANGE_MAX;
 import static fr.alex.Main.RANGE_MIN;
+import static fr.alex.MathUtils.getAdjustment;
+import static fr.alex.MathUtils.getDelta;
+import static fr.alex.MathUtils.normalize;
 
 public class Neuron {
 
@@ -17,14 +22,28 @@ public class Neuron {
         IntStream.range(0, nbInput).forEach(i -> this.weights.add(random(r)));
     }
 
-    public void train(Truth truth){
-        double output = think(truth.inputs);
-        adjustWeights(truth, output);
+    public Output train(Truth truth){
+        Output output = new Output();
+        output.output = think(truth.inputs);
+        return adjustWeights(truth, output);
     }
 
-    private void adjustWeights(Truth truth, double output) {
-        double error = truth.expected - output;
-        IntStream.range(0, weights.size() - 1).forEach(i -> weights.set(i, weights.get(i) + getAdjustment(error, truth.inputs.get(i), output)));
+    public Output train(Truth truth, double error){
+        Output output = new Output();
+        output.error = error;
+        output.output = think(truth.inputs);
+        return adjustWeights(truth, output);
+    }
+
+    private Output adjustWeights(Truth truth, Output output) {
+        if(output.error == null){
+            output.error = truth.expected - output.output;
+        }
+        output.delta = getDelta(output.error, output.output);
+        output.deltaStarWeight = IntStream.range(0, weights.size() - 1).mapToObj(i -> weights.get(i)*output.delta).collect(Collectors.toList());
+
+        IntStream.range(0, weights.size() - 1).forEach(i -> weights.set(i, weights.get(i) + getAdjustment(output.error, truth.inputs.get(i), output.output)));
+        return output;
     }
 
     public double think(List<Double> input){
@@ -36,18 +55,12 @@ public class Neuron {
         return IntStream.range(0, weights.size() - 1).mapToDouble(i -> weights.get(i)*input.get(i)).sum();
     }
 
-    private double normalize(double sum){
-        return 1/(1+Math.exp(-sum));
+    public class Output {
+        public double output;
+        public double delta;
+        public Double error;
+        public List<Double> deltaStarWeight;
     }
-
-    private double gradient(double output){
-        return output*(1-output);
-    }
-
-    private double getAdjustment(double error, double input, double output){
-        return error*input*gradient(output);
-    }
-
 
     @Override
     public String toString() {

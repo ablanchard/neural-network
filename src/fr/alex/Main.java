@@ -16,9 +16,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        exampleWithOneNeuron();
+        //exampleWithOneNeuron();
 
-
+        exampleWithOneNeuronNetwork();
 
     }
 
@@ -49,7 +49,7 @@ public class Main {
         System.out.println(network);
 
         //Find the answer for a new case
-        System.out.println(network.think(asList(1.0,0.0,0.0)));
+        System.out.println(network.think(asList(1.0,1.0,0.0)));
     }
 
     private static void exampleWithOneNeuron() {

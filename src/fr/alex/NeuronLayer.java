@@ -19,13 +19,22 @@ public class NeuronLayer {
     }
 
 
-    public void train(Truth truth){
+    public List<Neuron.Output> train(Truth truth){
+        return neurons.stream().map(n -> n.train(truth)).collect(Collectors.toList());
+    }
 
+    public List<Neuron.Output> train(Truth truth, List<Double> errors){
+        return IntStream.range(0, neurons.size() -1).mapToObj(i -> neurons.get(i).train(truth, errors.get(i))).collect(Collectors.toList());
     }
 
     public List<Double> think(List<Double> input){
         return neurons.stream().map(n -> n.think(input)).collect(Collectors.toList());
     }
 
-
+    @Override
+    public String toString() {
+        return "NeuronLayer{" +
+                "neurons=" + neurons +
+                '}';
+    }
 }

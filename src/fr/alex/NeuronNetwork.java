@@ -22,11 +22,31 @@ public class NeuronNetwork {
 
 
     public void train(Truth truth){
+        List<Double> thinkLayer1 = layer1.think(truth.inputs);
+
+        Truth truthForLayer2 = new Truth(truth.expected, thinkLayer1);
+        List<Neuron.Output> outputLayer2 = layer2.train(truthForLayer2);
+        layer1.train(truth, outputLayer2.get(0).deltaStarWeight);
 
     }
 
-    public double think(List<Double> input){
-        List<Double> layer1Results = layer1.think(input);
-        return layer2.think(layer1Results).get(0);
+    public Output think(List<Double> input){
+        Output output = new Output();
+        output.layer1 = layer1.think(input);
+        output.layer2 = layer2.think(output.layer1).get(0);
+        return output;
+    }
+
+    public class Output {
+        public double layer2;
+        public List<Double> layer1;
+
+        @Override
+        public String toString() {
+            return "Output{" +
+                    "layer2=" + layer2 +
+                    ", layer1=" + layer1 +
+                    '}';
+        }
     }
 }
