@@ -26,26 +26,26 @@ public class Neuron {
     }
 
     public double think(Input input){
-        double sumWeights = sumWeights(input);
-        return normalize(sumWeights);
+        double sumWeights = agregate(input);
+        return activate(sumWeights);
     }
 
-    private double sumWeights(Input input){
+    private double agregate(Input input){
         return weight1*input.input1+
                 weight2*input.input2+
                 weight3*input.input3;
     }
 
-    private double normalize(double sum){
+    private double activate(double sum){
         return 1/(1+Math.exp(-sum));
     }
 
-    private double gradient(double output){
+    private double activateDerivative(double output){
         return output*(1-output);
     }
 
     private double getAdjustment(double error, double input, double output){
-        return error*input*gradient(output);
+        return error*input* activateDerivative(output);
     }
 
     @Override

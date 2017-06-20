@@ -6,8 +6,8 @@ import java.util.Random;
 
 public class Main {
 
-    public static final double RANGE_MIN = -1;
-    public static final double RANGE_MAX = 1;
+    public static final double RANDOM_RANGE_MIN = -1;
+    public static final double RANDOM_RANGE_MAX = 1;
     public static final int ITERATION = 10000;
 
     public static void main(String[] args) {
@@ -37,6 +37,6 @@ public class Main {
     }
 
     private static double random(Random r){
-        return RANGE_MIN + (RANGE_MAX - RANGE_MIN) * r.nextDouble();
+        return RANDOM_RANGE_MIN + (RANDOM_RANGE_MAX - RANDOM_RANGE_MIN) * r.nextDouble();
     }
 }
