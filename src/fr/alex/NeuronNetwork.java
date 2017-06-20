@@ -4,10 +4,10 @@ import java.util.List;
 
 public class NeuronNetwork {
 
-    public NeuronLayer layer1;
+    public HiddenNeuronLayer layer1;
     public NeuronLayer layer2;
 
-    public NeuronNetwork(NeuronLayer layer1, NeuronLayer layer2) {
+    public NeuronNetwork(HiddenNeuronLayer layer1, NeuronLayer layer2) {
         this.layer1 = layer1;
         this.layer2 = layer2;
     }
