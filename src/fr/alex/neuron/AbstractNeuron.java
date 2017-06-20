@@ -1,4 +1,6 @@
-package fr.alex;
+package fr.alex.neuron;
+
+import fr.alex.utils.Truth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +10,7 @@ import java.util.stream.IntStream;
 
 import static fr.alex.Main.RANGE_MAX;
 import static fr.alex.Main.RANGE_MIN;
-import static fr.alex.MathUtils.*;
+import static fr.alex.utils.MathUtils.*;
 
 public abstract class AbstractNeuron {
 

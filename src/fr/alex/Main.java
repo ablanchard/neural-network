@@ -1,5 +1,10 @@
 package fr.alex;
 
+import fr.alex.layer.HiddenNeuronLayer;
+import fr.alex.layer.NeuronLayer;
+import fr.alex.network.NeuronNetwork;
+import fr.alex.utils.Truth;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

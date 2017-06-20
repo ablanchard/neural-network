@@ -1,6 +1,9 @@
-package fr.alex;
+package fr.alex.layer;
 
-import java.util.ArrayList;
+import fr.alex.neuron.AbstractNeuron;
+import fr.alex.neuron.HiddenNeuron;
+import fr.alex.utils.Truth;
+
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -12,7 +15,7 @@ public class HiddenNeuronLayer extends AbstractNeuronLayer<HiddenNeuron> {
         super(IntStream.range(0, nbNeuron).mapToObj(i -> new HiddenNeuron(r, nbInputPerNeuron)).collect(Collectors.toList()));
     }
 
-    public List<Neuron.Output> train(Truth truth, List<Double> errors){
+    public List<AbstractNeuron.Output> train(Truth truth, List<Double> errors){
         return IntStream.range(0, neurons.size()).mapToObj(i -> neurons.get(i).train(truth, errors.get(i))).collect(Collectors.toList());
     }
 

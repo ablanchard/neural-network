@@ -1,4 +1,4 @@
-package fr.alex;
+package fr.alex.utils;
 
 public class MathUtils {
 

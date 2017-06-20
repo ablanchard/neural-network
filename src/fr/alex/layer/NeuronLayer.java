@@ -1,4 +1,7 @@
-package fr.alex;
+package fr.alex.layer;
+
+import fr.alex.neuron.Neuron;
+import fr.alex.utils.Truth;
 
 import java.util.List;
 import java.util.Random;

@@ -1,4 +1,9 @@
-package fr.alex;
+package fr.alex.network;
+
+import fr.alex.layer.HiddenNeuronLayer;
+import fr.alex.layer.NeuronLayer;
+import fr.alex.neuron.Neuron;
+import fr.alex.utils.Truth;
 
 import java.util.List;
 
