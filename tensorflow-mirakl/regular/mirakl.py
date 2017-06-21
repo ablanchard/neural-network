@@ -42,7 +42,7 @@ def main(unused_argv):
   test_set = pd.read_csv("mirakl_test.csv", skipinitialspace=True,
                          skiprows=1, names=COLUMNS)
 
-  # Set of 6 examples for which to predict median house values
+  # Set of 6 examples for which to predict order quantities
   prediction_set = pd.read_csv("mirakl_predict.csv", skipinitialspace=True,
                                skiprows=1, names=COLUMNS)
 
@@ -66,7 +66,7 @@ def main(unused_argv):
   # Print out predictions
   y = regressor.predict(input_fn=lambda: input_fn(prediction_set))
   # .predict() returns an iterator; convert to a list and print predictions
-  predictions = list(itertools.islice(y, 6))
+  predictions = list(itertools.islice(y, 7))
   print("Predictions: {}".format(str(predictions)))
 
 if __name__ == "__main__":
