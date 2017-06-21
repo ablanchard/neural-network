@@ -17,14 +17,12 @@ public class NeuronNetwork {
         this.layer2 = layer2;
     }
 
-    @Override
-    public String toString() {
-        return "NeuronNetwork{" +
-                "layer1=" + layer1 +
-                ", layer2=" + layer2 +
-                '}';
+    public Output think(List<Double> input){
+        Output output = new Output();
+        output.layer1 = layer1.think(input);
+        output.layer2 = layer2.think(output.layer1).get(0);
+        return output;
     }
-
 
     public void train(Truth truth){
         List<Double> thinkLayer1 = layer1.think(truth.inputs);
@@ -33,13 +31,6 @@ public class NeuronNetwork {
         List<Neuron.Output> outputLayer2 = layer2.train(truthForLayer2);
         layer1.train(truth, outputLayer2.get(0).deltaStarWeight);
 
-    }
-
-    public Output think(List<Double> input){
-        Output output = new Output();
-        output.layer1 = layer1.think(input);
-        output.layer2 = layer2.think(output.layer1).get(0);
-        return output;
     }
 
     public class Output {
@@ -53,5 +44,13 @@ public class NeuronNetwork {
                     ", layer1=" + layer1 +
                     '}';
         }
+    }
+
+    @Override
+    public String toString() {
+        return "NeuronNetwork{" +
+                "layer1=" + layer1 +
+                ", layer2=" + layer2 +
+                '}';
     }
 }

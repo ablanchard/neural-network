@@ -10,10 +10,6 @@ public class MathUtils {
         return output*(1-output);
     }
 
-    public static double getAdjustment(double error, double input, double output){
-        return error*input* activateDerivative(output);
-    }
-
     public static double getAdjustment(double input, double delta){
         return input*delta;
     }

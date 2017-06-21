@@ -21,17 +21,6 @@ public abstract class AbstractNeuron {
         IntStream.range(0, nbInput).forEach(i -> this.weights.add(random(r)));
     }
 
-    protected Output adjustWeights(Truth truth, Output output) {
-        if(output.error == null){
-            output.error = truth.expected - output.output;
-        }
-        output.delta = getDelta(output.error, output.output);
-        output.deltaStarWeight = IntStream.range(0, weights.size()).mapToObj(i -> weights.get(i)*output.delta).collect(Collectors.toList());
-
-        IntStream.range(0, weights.size()).forEach(i -> weights.set(i, weights.get(i) + getAdjustment(output.error, truth.inputs.get(i), output.output)));
-        return output;
-    }
-
     public double think(List<Double> input){
         double aggregation = aggregate(input);
         return activate(aggregation);
@@ -39,6 +28,17 @@ public abstract class AbstractNeuron {
 
     private double aggregate(List<Double> input){
         return IntStream.range(0, weights.size()).mapToDouble(i -> weights.get(i)*input.get(i)).sum();
+    }
+
+    protected Output adjustWeights(Truth truth, Output output) {
+        if(output.error == null){
+            output.error = truth.expected - output.output;
+        }
+        output.delta = getDelta(output.error, output.output);
+        output.deltaStarWeight = IntStream.range(0, weights.size()).mapToObj(i -> weights.get(i)*output.delta).collect(Collectors.toList());
+
+        IntStream.range(0, weights.size()).forEach(i -> weights.set(i, weights.get(i) + getAdjustment(truth.inputs.get(i), output.delta)));
+        return output;
     }
 
     public class Output {
