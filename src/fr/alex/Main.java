@@ -13,10 +13,10 @@ public class Main {
     public static void main(String[] args) {
 
         List<Truth> truths = new ArrayList<>();
-        truths.add(new Truth(0L, 0L, 1L, 0L));
-        truths.add(new Truth(1L, 1L, 1L, 1L));
-        truths.add(new Truth(1L, 0L, 1L, 1L));
-        truths.add(new Truth(0L, 0L, 1L, 0L));
+        truths.add(new Truth(0, 0, 1, 0));
+        truths.add(new Truth(1, 1, 1, 1));
+        truths.add(new Truth(1, 0, 1, 1));
+        truths.add(new Truth(0, 0, 1, 0));
 
         Random r = new Random();
 
@@ -32,7 +32,7 @@ public class Main {
         System.out.println(neuron);
 
         //Find the answer for a new case
-        System.out.println(neuron.think(new Input(1L,0L,0L)));
+        System.out.println(neuron.think(new Input(1,0,0)));
 
     }
 

@@ -12,40 +12,45 @@ public class Neuron {
         this.weight3 = weight3;
     }
 
+    public double think(Input input){
+        double aggregation = aggregate(input);
+        return activate(aggregation);
+    }
+
     public void train(Truth truth){
         double output = think(truth.input);
         adjustWeights(truth, output);
     }
 
-    private void adjustWeights(Truth truth, double output) {
-        double error = truth.expected - output;
-
-        weight1 += getAdjustment(error,truth.input.input1,output);
-        weight2 += getAdjustment(error,truth.input.input2,output);
-        weight3 += getAdjustment(error,truth.input.input3,output);
-    }
-
-    public double think(Input input){
-        double sumWeights = agregate(input);
-        return activate(sumWeights);
-    }
-
-    private double agregate(Input input){
+    private double aggregate(Input input){
         return weight1*input.input1+
                 weight2*input.input2+
                 weight3*input.input3;
     }
 
-    private double activate(double sum){
-        return 1/(1+Math.exp(-sum));
+    private double activate(double aggregation){
+        return 1/(1+Math.exp(-aggregation));
+    }
+
+    private void adjustWeights(Truth truth, double output) {
+        double error = truth.expected - output;
+
+        double delta = getDelta(error, output);
+        weight1 += getAdjustment(truth.input.input1,delta);
+        weight2 += getAdjustment(truth.input.input2,delta);
+        weight3 += getAdjustment(truth.input.input3,delta);
+    }
+
+    private double getDelta(double error, double output) {
+        return error * activateDerivative(output);
     }
 
     private double activateDerivative(double output){
         return output*(1-output);
     }
 
-    private double getAdjustment(double error, double input, double output){
-        return error*input* activateDerivative(output);
+    private double getAdjustment(double input, double delta){
+        return input * delta;
     }
 
     @Override
